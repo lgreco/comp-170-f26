@@ -49,6 +49,21 @@ if check(user_input):
     # hand the string to int().
     year_born = int(user_input)
     age = CURRENT_YEAR - year_born
+
+    # print() is likewise a shortcut, the output twin of input() -- it
+    # writes text to the terminal (what CS people call "standard output")
+    # instead of, say, saving it anywhere. That's the right move for a
+    # small demo program like this one, where a human is sitting right
+    # there watching it run and the result only needs to exist for as
+    # long as they're looking at the screen.
+    #
+    # A program's result doesn't have to go to a screen at all, though.
+    # Just as often it gets written to a file, drawn in a GUI window or a
+    # web page, sent over a network to another program, stored in a
+    # database, or used to drive a physical device (a thermostat clicking
+    # a furnace on, a robot arm moving) -- print() doesn't cover any of
+    # those; we'll meet some of these other destinations later in the
+    # course.
     print("Your are", age, "years old")
 else:
     # Bad input doesn't crash the program -- we handle it gracefully
