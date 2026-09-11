@@ -13,6 +13,25 @@ ENTRY_PROMPT = "Year you were born. "
 # First take the keyboard entry
 # We don't call this "year_born" yet, because at this point we don't know
 # if what the user typed is actually a valid year -- it's just user input.
+#
+# input() is a bit of a shortcut, and not how most real Python programs
+# get their data. Production programs more often read command line
+# arguments instead -- extra words typed after the program's name when
+# you launch it, e.g. running "python3 age.py 1967" instead of running
+# "python3 age.py" and then waiting to be asked. Python hands those extra
+# words to the program as a list (sys.argv) the moment it starts, so the
+# program never has to pause and interact with a human at all. But
+# reading that list correctly, and handling a user who forgets to supply
+# one, takes several lines of setup -- more than we're ready for yet.
+# input() gets a value from a human in a single line, which is why it's
+# a good fit for a small demo program like this one.
+#
+# And a human typing at a prompt is only one source of data, and an
+# unusual one at that. Just as often a program reads its data from a
+# file already sitting on disk, from a sensor (a thermostat reading a
+# temperature, a phone reading its GPS), from a network connection, or
+# from a database -- input() doesn't apply to any of those; we'll meet
+# some of these other sources later in the course.
 user_input = input(ENTRY_PROMPT)
 
 # Evaluate it to verify it's legit (numbers only)
