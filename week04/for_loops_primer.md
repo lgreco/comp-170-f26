@@ -86,8 +86,7 @@ once at the end. That's the entire difference indentation makes.
 ## Looping over something other than numbers
 
 `range()` isn't the only thing you can put after `in`. A string works
-the same way — Python hands you one character at a time, in order, just
-like taking attendance hands you one name at a time:
+the same way — Python hands you one character at a time, in order from left to right.
 
 ```python
 for symbol in "1967":
