@@ -1,6 +1,5 @@
 # Assignment: Functions That Draw Shapes
 
-Due Friday, October 2.
 
 Four functions, all in one file, `shapes.py`. Each takes its size and its
 characters as input arguments and prints a shape. Their whole job is to
@@ -40,6 +39,7 @@ For every shape:
    Put each instruction on a comment line directly above the code that
    carries it out, the way `draw_square` has `# print top half` above
    its first loop.
+5. **Do not worry about type hints.**
 
 Rules that apply to every part:
 
