@@ -1,7 +1,6 @@
 # Assignment: Functions That Draw Shapes
 
-
-Four functions, all in one file, `shapes.py`. Each takes its size and its
+For this assignment, create four functions, all in one file called `shapes.py`. Each function takes its size and its
 characters as input arguments and prints a shape. Their whole job is to
 print. The model to follow is [`functions.py`](functions.py) from
 Friday's class: `print_square` for a function that takes a size and a
