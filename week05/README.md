@@ -220,7 +220,7 @@ calls it. Be ready to talk about this in class Monday.
 
 ### New this week (Week 5)
 
-- [Lubanovic, *Introducing Python*, 3rd edition, "Functions"](https://learning.oreilly.com/library/view/introducing-python-3rd/9781098174392/)
+- [Lubanovic, *Introducing Python*, 3rd edition, Ch. 10, "Functions"](https://learning.oreilly.com/library/view/introducing-python-3rd/9781098174392/ch10.html)
   — only the first four sections: "Define a Function with `def`," "Call
   a Function with Parentheses," "Arguments and Parameters," and
   "Positional Arguments." The rest of the chapter is for later.
@@ -244,8 +244,8 @@ Still fair game for questions in class or on assessments. Carried
 forward from each earlier week's assignment:
 
 - Week 4 — from [`range_strings_practice.md`](../week04/range_strings_practice.md):
-  - [Lubanovic, Ch. 4, "Text Strings"](https://learning.oreilly.com/library/view/introducing-python-3rd/9781098174392/ch04.html) — in full.
-  - [Lubanovic, Ch. 7](https://learning.oreilly.com/library/view/introducing-python-3rd/9781098174392/ch07.html) — loops, in terms of iterables.
+  - [Lubanovic, Ch. 4, "Strings"](https://learning.oreilly.com/library/view/introducing-python-3rd/9781098174392/ch04.html) — in full.
+  - [Lubanovic, Ch. 7, "For and While"](https://learning.oreilly.com/library/view/introducing-python-3rd/9781098174392/ch07.html) — loops, in terms of iterables.
   - [`for_loops_primer.md`](../week04/for_loops_primer.md) — the `for`-loop primer.
   - [`compute_interest.py`](../week04/compute_interest.py) — the compound-interest `for` loop.
   - [`range`](https://docs.python.org/3/library/stdtypes.html#range)

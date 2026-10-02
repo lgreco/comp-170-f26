@@ -119,14 +119,14 @@ you've worked through the examples.
 
 Textbook material — easier reading:
 
-* [Lubanovic, Ch. 4, "Text Strings"](https://learning.oreilly.com/library/view/introducing-python-3rd/9781098174392/ch04.html),
+* [Lubanovic, Ch. 4, "Strings"](https://learning.oreilly.com/library/view/introducing-python-3rd/9781098174392/ch04.html),
   in full — a little technical, but it's the most complete and
   authoritative source on Python strings. Strings have a lot of methods
   (behaviors); all useful, but you don't need to memorize every one of
   them. What matters is knowing where to look when you need a specific
   one for a task. The five worth having memorized are `index`, `join`,
   `lower`, `upper`, and `split`; for everything else, look it up first.
-* [Lubanovic, Ch. 7](https://learning.oreilly.com/library/view/introducing-python-3rd/9781098174392/ch07.html) —
+* [Lubanovic, Ch. 7, "For and While"](https://learning.oreilly.com/library/view/introducing-python-3rd/9781098174392/ch07.html) —
   loops, discussed in terms of the iterables we covered in class.
 * [`for_loops_primer.md`](for_loops_primer.md) — the `for`-loop primer
   posted this week.
