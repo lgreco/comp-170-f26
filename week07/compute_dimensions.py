@@ -1,0 +1,24 @@
+from sears_facts import *
+
+def compute_widths(height:int) -> list[int]:
+    """Using sears_facts.ASPECT_RATIO compute the base width and then using
+    proportionality constants also from sears_facts, compute mid and top
+    tier widths. Return all widths as a list (array).
+
+    Input:
+    ------
+    height: int
+      The desired height for the Sears tower in lines.
+
+    Returns:
+    --------
+    list[int]
+      An array (list) with the bottom, middle, and top tier widths.
+    """
+    bottom_width: int = int(height / SEARS_TOWER_ASPECT_RATIO)
+    middle_width: int = int(bottom_width * MIDDLE_TIER_WIDTH_SCALE)
+    top_width: int = int(middle_width * TOP_TIER_WIDTH_SCALE)
+
+    results: list[int]  = [ bottom_width, middle_width, top_width ]
+
+    return results
