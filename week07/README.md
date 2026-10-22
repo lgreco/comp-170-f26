@@ -90,4 +90,4 @@ Still fair game for questions in class or on assessments. Carried forward from e
 
 Upload `compute_dimensions.py`, `output_concern.py`, and your new `tower.py` to Sakai.
 
-Self-check before you upload. From this folder, run `tower.py` — confirm it draws a correctly centered tower, and that typing `0` or a negative number when asked for a height loops back and asks again instead of crashing or drawing nothing.
+Self-check before you upload. From this folder, run `tower.py` — confirm it draws a correctly centered tower, and that typing a negative number or a word (like `abc`) when asked for a height loops back and asks again instead of crashing, and that typing `0` quits without drawing anything.
