@@ -41,16 +41,21 @@ def index_of(values: list, target) -> int:
     """Return the position of the first element of values equal to target,
     or -1 if target is not in values."""
     idx = -1  # pessimistic: assume not found
+    # i is the position we are about to examine.
     i = 0
+    # Two conditions: we have not run off the end, and we have not found it yet.
     while i < len(values) and idx == -1:  # stop as soon as we find it
         if values[i] == target:
+            # Found: remember where. idx is no longer -1, so the loop ends.
             idx = i
+        # Move on to the next position.
         i = i + 1
     return idx
 
 
 def contains(values: list, target) -> bool:
     """Return True if target appears in values, False otherwise."""
+    # index_of answers -1 only when there is no position, so any other answer means "yes".
     found = index_of(values, target) != -1
     return found
 
@@ -59,14 +64,18 @@ def indices_of(values: list, target) -> list[int]:
     """Return every position at which target appears in values, in order.
     The result is an empty list if target does not appear."""
     paper = []  # the "piece of paper"
+    # A for loop over every position: unlike index_of, we must not stop at the first match.
     for i in range(len(values)):  # cannot stop early: we want all
         if values[i] == target:
+            # Write down this position on the paper.
             paper.append(i)
+    # Empty if never found, which is the right answer for "no positions".
     return paper
 
 
 def count(values: list, target) -> int:
     """Return the number of times target appears in values (0 if never)."""
+    # The number of positions found is the number of occurrences.
     total = len(indices_of(values, target))
     return total
 
@@ -78,7 +87,9 @@ def index_of_min(values: list) -> int:
     idx = -1  # pessimistic: empty list
     if len(values) > 0:
         idx = 0  # assume the first is the smallest
+        # Start at 1: position 0 is already our champion, no need to compare it to itself.
         for i in range(1, len(values)):
+            # Strict <, so on a tie the earlier position keeps the title.
             if values[i] < values[idx]:  # challenged: move the pointer
                 idx = i
     return idx
@@ -88,10 +99,13 @@ def index_of_max(values: list) -> int:
     """Return the position of the largest element of values, or -1 if values
     is empty. Same greedy search as index_of_min with the comparison
     flipped. Ties keep the earliest position."""
+    # Pessimistic default: -1 for an empty list.
     idx = -1
     if len(values) > 0:
+        # Assume the first element is the largest...
         idx = 0
         for i in range(1, len(values)):
+            # ...until a strictly larger one challenges it (> keeps ties on the earlier one).
             if values[i] > values[idx]:
                 idx = i
     return idx
@@ -124,16 +138,22 @@ def compare(first: list, second: list) -> int:
     length only counts when the maximums tie.
     """
     result = 0                               # pessimistic: a tie
+    # Guard: index_of_max returns -1 on an empty list, so handle empties first.
+    # The difference of lengths is negative, zero or positive exactly as the rule says.
     if len(first) == 0 or len(second) == 0:
         result = len(first) - len(second)    # empty loses to non-empty
     else:
+        # index_of_max gives a position; indexing with it gives the value itself.
         biggest_first = first[index_of_max(first)]
         biggest_second = second[index_of_max(second)]
+        # Rule step 1: the larger maximum wins. < and > work for numbers and for
+        # strings (alphabetical order), which is why one rule covers both kinds.
         if biggest_first < biggest_second:
             result = -1
         elif biggest_first > biggest_second:
             result = 1
         else:
+            # Rule step 2: the maximums tie, so length breaks the tie.
             result = len(first) - len(second)    # tie on maximum: longer wins
     return result
 
@@ -212,6 +232,7 @@ SAMPLE_LISTS: list[list] = [
 
 def sign(number: int) -> int:
     """Return -1, 0 or 1 according to the sign of number."""
+    # Pessimistic default: zero stays zero.
     result = 0
     if number < 0:
         result = -1
@@ -222,15 +243,19 @@ def sign(number: int) -> int:
 
 def same_kind(first: list, second: list) -> bool:
     """True unless one list holds numbers and the other holds strings."""
+    # Empty lists are compatible with anything, so default to True.
     ok = True
     if len(first) > 0 and len(second) > 0:
+        # Compare the type of each list's first element: both str, or both not.
         ok = isinstance(first[0], str) == isinstance(second[0], str)
     return ok
 
 
 def test_returns_an_integer() -> None:
+    # Try every ordered pair of sample lists (two nested loops)...
     for first in SAMPLE_LISTS:
         for second in SAMPLE_LISTS:
+            # ...skipping pairs that mix numbers and strings, which cannot be compared.
             if same_kind(first, second):
                 answer = compare(first, second)
                 assert isinstance(
@@ -239,6 +264,7 @@ def test_returns_an_integer() -> None:
 
 
 def test_a_list_equals_itself() -> None:
+    # Comparing a list with itself must always give 0.
     for values in SAMPLE_LISTS:
         assert compare(values, values) == 0, f"compare({values}, {values}) should be 0"
 
@@ -247,6 +273,7 @@ def test_swapping_reverses_the_answer() -> None:
     for first in SAMPLE_LISTS:
         for second in SAMPLE_LISTS:
             if same_kind(first, second):
+                # sign() reduces each answer to -1, 0 or 1, so only direction matters.
                 forward = sign(compare(first, second))
                 backward = sign(compare(second, first))
                 assert (
@@ -267,6 +294,7 @@ def test_the_rule_is_consistent() -> None:
 
 
 def test_compare_tells_some_lists_apart() -> None:
+    # Count the pairs that compare() considers different.
     different = 0
     for first in SAMPLE_LISTS:
         for second in SAMPLE_LISTS:
@@ -277,6 +305,7 @@ def test_compare_tells_some_lists_apart() -> None:
 
 def run_tests() -> None:
     """Run each test above and report ok or FAIL, with the reason."""
+    # Functions are values, so we can keep the tests in a list and loop over them.
     tests = [
         test_returns_an_integer,
         test_a_list_equals_itself,
@@ -286,6 +315,7 @@ def run_tests() -> None:
     ]
     passed = 0
     for test in tests:
+        # try/except lets one failing test be reported without stopping the others.
         try:
             test()
             print(f"ok    {test.__name__}")
@@ -295,5 +325,6 @@ def run_tests() -> None:
     print(f"\n{passed} of {len(tests)} checks passed")
 
 
+# Runs only when this file is executed directly, not when it is imported.
 if __name__ == "__main__":
     run_tests()

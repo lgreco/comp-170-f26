@@ -58,10 +58,15 @@ def position_to_seat(position: int) -> list:
       [row, seat_letter] -- row is an int (1, 2, 3, ...), seat_letter is
       a single character ('A', 'B', 'C', or 'D' for a 2+2 layout).
     """
+    # Complete rows before this position, plus 1 because rows start at 1.
     row: int = position // SEATS_PER_ROW + 1
+    # How far into the current row we are: 0 for A, 1 for B, and so on.
     seat_index: int = position % SEATS_PER_ROW
+    # ord() turns 'A' into its character code, we add the offset, and chr()
+    # turns the new code back into a letter: 'A' + 2 gives 'C'.
     seat_letter: str = chr(ord(FIRST_SEAT_LETTER) + seat_index)
 
+    # Package both answers in a list so the function can return them together.
     result: list = [row, seat_letter]
 
     return result
@@ -90,8 +95,11 @@ def seat_to_position(row: int, seat_letter: str) -> int:
     int
       The matching position in PASSENGERS.
     """
+    # Every complete row before this one contributes SEATS_PER_ROW positions.
     seats_before_row: int = (row - 1) * SEATS_PER_ROW
+    # Subtracting character codes gives the letter's offset: 'C' - 'A' is 2.
     seat_index: int = ord(seat_letter) - ord(FIRST_SEAT_LETTER)
+    # Skip the earlier rows, then move across this row to the seat.
     position: int = seats_before_row + seat_index
 
     return position
@@ -113,12 +121,19 @@ def column_widths(passengers: list[str]) -> list[int]:
     list[int]
       One width per seat column, SEATS_PER_ROW of them.
     """
+    # One running maximum per column, all starting at 0 so any entry beats it.
     widths: list[int] = [0] * SEATS_PER_ROW
+    # Visit every seat in the manifest, one position at a time.
     for position in range(len(passengers)):
+        # Decode the position; unpacking splits the [row, letter] list in two.
         row, seat_letter = position_to_seat(position)
+        # The column is the seat's offset within its row, again via %.
         column: int = position % SEATS_PER_ROW
+        # The seat label printed above the name, e.g. '10A'.
         label: str = f'{row}{seat_letter}'
+        # The wider of the label and the name decides how much room this seat needs.
         widest: int = max(len(label), len(passengers[position]))
+        # Keep the largest width seen so far for this column.
         if widest > widths[column]:
             widths[column] = widest
 
@@ -145,13 +160,18 @@ def build_line(cells: list[str], widths: list[int]) -> str:
     str
       The assembled line.
     """
+    # Start with an empty line and append to it, cell by cell.
     line: str = EMPTY
     for column in range(len(cells)):
+        # The last cell on the line gets no padding and no gap after it.
         is_last: bool = column == len(cells) - 1
         if is_last:
             line = line + cells[column]
         else:
+            # ljust pads the cell with spaces on the right up to the column's width.
             line = line + cells[column].ljust(widths[column])
+            # After the last seat left of the aisle, draw the aisle;
+            # after any other seat, just a small gap.
             if column == LAST_LEFT_COLUMN:
                 line = line + AISLE
             else:
@@ -178,22 +198,30 @@ def print_seat_assignments(passengers: list[str]) -> None:
     None
       This function only prints.
     """
+    # Measure the columns once, up front, so every row is aligned the same way.
     widths: list[int] = column_widths(passengers)
+    # The two lines of the row being collected: seat labels and names.
     labels: list[str] = []
     names: list[str] = []
 
     for position in range(len(passengers)):
+        # Decode this position into its row and letter.
         row, seat_letter = position_to_seat(position)
+        # Add this seat's label and passenger to the row being collected.
         labels.append(f'{row}{seat_letter}')
         names.append(passengers[position])
 
+        # The last seat of a row has offset SEATS_PER_ROW - 1 (here, D).
         row_is_complete: bool = position % SEATS_PER_ROW == SEATS_PER_ROW - 1
+        # A partly filled last row must still be printed.
         manifest_is_over: bool = position == len(passengers) - 1
         if row_is_complete or manifest_is_over:
             if row != 1:
                 print()  # blank line *between* rows, not before the first
+            # Print the labels line, then the names line, of this row.
             print(build_line(labels, widths))
             print(build_line(names, widths))
+            # Start fresh lists for the next row.
             labels = []
             names = []
 
@@ -222,20 +250,31 @@ def who_is_in_seat(passengers: list[str], row: int, seat_letter: str) -> str:
     str
       The passenger's name, or a message that no one is booked there.
     """
+    # Pessimistic default: assume nobody is there.
     result: str = NO_ONE
 
+    # Translate the seat into an index of the flat array.
     position: int = seat_to_position(row, seat_letter)
+    # Where the letter falls within a row; must be 0..3 for a 2+2 plane.
     seat_index: int = ord(seat_letter) - ord(FIRST_SEAT_LETTER)
+    # A chained comparison: True only if seat_index is between 0 and 3.
     letter_ok: bool = 0 <= seat_index < SEATS_PER_ROW
+    # The position must also fall inside the manifest, or indexing would crash.
     position_ok: bool = 0 <= position < len(passengers)
+    # Only when every check passes do we replace the default with the name.
     if row >= 1 and letter_ok and position_ok:
         result = passengers[position]
 
     return result
 
 
+# Runs only when this file is executed directly, not when it is imported.
 if __name__ == '__main__':
+    # The whole chart.
     print_seat_assignments(PASSENGERS)
+    # A seat in the middle of the plane.
     print(who_is_in_seat(PASSENGERS, 2, 'C'))
+    # The very first seat (position 0).
     print(who_is_in_seat(PASSENGERS, 1, 'A'))
+    # A row far beyond the manifest: expect the "No one" message.
     print(who_is_in_seat(PASSENGERS, 99, 'A'))
