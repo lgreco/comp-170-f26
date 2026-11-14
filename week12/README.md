@@ -72,4 +72,4 @@ Before you turn it in, check that the memo:
 - uses real keys and counts from the book, not made-up examples;
 - deals with punctuation explicitly;
 - names at least one case where your own rules get it wrong;
-- runs between 600 and 900 words.
+- runs between 400 and 600 words.
