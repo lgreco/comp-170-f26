@@ -59,7 +59,6 @@ In short, stemming is a fast set of rules that doesn't understand the text, and 
 - [Wikipedia, lemmatization: dictionary forms and why context matters](https://en.wikipedia.org/wiki/Lemmatization). Short; read all of it. The "better" → "good" and "meeting" examples are worth remembering.
 - [Wikipedia, how tokenization splits text into tokens](https://en.wikipedia.org/wiki/Lexical_analysis#Tokenization). Just this section. It is written for programming languages, but the idea is the same for English. *Optional.*
 - [Python tutorial, dictionaries: keys, lookups, and looping](https://docs.python.org/3/tutorial/datastructures.html#dictionaries). Creating a dictionary, checking for a key with `in`, and listing the keys. The "Looping Techniques" section right after it shows the `for key, value in ... .items()` loop from 11/11.
-- [Wikipedia, the Kobayashi Maru: Star Trek's unwinnable test](https://en.wikipedia.org/wiki/Kobayashi_Maru). No connection to text cleaning, unless your rules start cheating. Just for fun, and entirely *optional*.
 
 Previously assigned readings are still fair game for questions in class or on assessments.
 
@@ -72,4 +71,4 @@ Before you turn it in, check that the memo:
 - uses real keys and counts from the book, not made-up examples;
 - deals with punctuation explicitly;
 - names at least one case where your own rules get it wrong;
-- runs between 400 and 600 words.
+- runs between 600 and 900 words.
