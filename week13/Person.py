@@ -1,17 +1,17 @@
 class Person:
-    """The structure of a simple object in pictorial 
+    """The structure of a simple object in pictorial
     form (using Unified Modeling Language - UML).
-    
-    -------------------
-    | Person 
-    | -----------------
-    | - first_name: str
-    | - last_name: str
-    | - fav_snack: str
-    | - birth_month: int
-    | - bidth_day: int    
-    | - ssn: int
-    | ---------------------
+
+    ------------------------------|
+    | Person                      |
+    | ----------------------------|
+    | - first_name: str           |
+    | - last_name: str            |
+    | - fav_snack: str            |
+    | - birth_month: int          |
+    | - birth_day: int            |
+    | - ssn: int                  |
+    | ----------------------------|
     | + get_first_name() -> str   |
     | + get_ssn() -> int          |
     | -----------------------------
