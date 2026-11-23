@@ -31,7 +31,7 @@ class Person:
         self.__ssn = -1
 
     def __str__(self):
-        return f"{self.__first_name} -- birthday on {self.__birth_month}/{self.__birth_day}"
+        return f"{self.__first_name} {self.__last_name}-- birthday on {self.__birth_month}/{self.__birth_day}"
 
     def get_first_name(self):
         return self.__first_name
